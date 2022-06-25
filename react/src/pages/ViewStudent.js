@@ -48,10 +48,12 @@ function ViewStudent() {
           <td>{item.phone}</td>
           <td>
             <Link
-              to={`edit-student/${item.id}`}
+              replace
+              to={`../edit-student/${item.id}`}
               className='btn btn-success btn-sm'
             >
               Edit
+              {console.log(item)}
             </Link>
           </td>
           <td>
@@ -78,7 +80,7 @@ function ViewStudent() {
                 <h4>
                   Students Data
                   <Link
-                    to={"add-student"}
+                    to={"../add-student"}
                     className='btn btn-primary btn-sm float-end'
                   >
                     {" "}

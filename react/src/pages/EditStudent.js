@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
 function EditStudent(props) {
+  let { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [studentInput, setStudent] = useState([]);
   const [errorInput, setError] = useState([]);
-
+  // console.log(props);
+  const student_id = +id;
+  // console.log(student_id);
   useEffect(() => {
-    const student_id = props.match.params.id;
-    axios.get(`/api/edit-student/${student_id}`).then((res) => {
-      if (res.data.status === 200) {
-        setStudent(res.data.student);
-        setLoading(false);
-      } else if (res.data.status === 404) {
-        swal("Error", res.data.message, "error");
-        navigate("/students");
-      }
-    });
-  }, []);
+    const fetchEditStudent = () => {
+      // console.log(props);
+      axios.get(`/api/edit-student/${student_id}`).then((res) => {
+        if (res.data.status === 200) {
+          setStudent(res.data.student);
+          setLoading(false);
+        } else if (res.data.status === 404) {
+          swal("Error", res.data.message, "error");
+          navigate("/students");
+        }
+      });
+    };
+    return fetchEditStudent();
+  }, [navigate, student_id]);
 
   const handleInput = (e) => {
     e.persist();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -34,7 +34,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link className='nav-link' to='/add-student'>
+                <Link className='nav-link' to='add-student'>
                   Add Student
                 </Link>
               </li>
@@ -42,6 +42,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
+      <Outlet />
     </div>
   );
 }
